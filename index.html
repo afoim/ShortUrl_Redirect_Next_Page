@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <title>External Link</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy"
 content="
   default-src 'none';
-  script-src 'unsafe-inline';
-  style-src 'unsafe-inline';
+  script-src 'self';
+  style-src 'self';
   img-src 'none';
   font-src 'none';
   connect-src 'none';
@@ -19,15 +20,8 @@ content="
   form-action 'none';
   frame-ancestors 'none';
 ">
-
-
-    <style>
-    #url {
-      white-space: pre-wrap;      /* 允许换行 */
-      word-break: break-all;      /* 极长字符串强制断行 */
-      overflow-wrap: anywhere;    /* 现代浏览器更优断行 */
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -37,66 +31,6 @@ content="
 
   <pre id="url"></pre>
 
-  <button id="go"></button>
-
-  <script>
-    const I18N = {
-      en: {
-        title: "Leaving This Site",
-        warn:
-          "You are about to visit an external website. The destination is not controlled by us. " +
-          "Please make sure the link is safe before continuing.",
-        go: "Continue"
-      },
-      zh: {
-        title: "即将离开本站",
-        warn:
-          "你即将访问一个外部网站，该站点不受本站控制。请确认链接安全后再继续访问。",
-        go: "继续访问"
-      }
-    };
-
-    function detectLang() {
-      const p = new URLSearchParams(location.search);
-      const q = p.get("lang");
-      if (q && I18N[q]) return q;
-
-      const langs = navigator.languages || [navigator.language];
-      for (const l of langs) {
-        const short = l.toLowerCase().split("-")[0];
-        if (I18N[short]) return short;
-      }
-      return "en";
-    }
-
-    const params = new URLSearchParams(location.search);
-    const rawUrl = params.get("url");
-
-    if (!rawUrl) {
-      document.body.textContent = "Missing url parameter";
-      throw 0;
-    }
-
-    let target;
-    try {
-      target = new URL(rawUrl).toString();
-    } catch {
-      document.body.textContent = "Invalid url";
-      throw 0;
-    }
-
-    const lang = detectLang();
-    const t = I18N[lang];
-
-    document.documentElement.lang = lang;
-    document.getElementById("title").textContent = t.title;
-    document.getElementById("warn").textContent = t.warn;
-    document.getElementById("url").textContent = target;
-    document.getElementById("go").textContent = t.go;
-
-    document.getElementById("go").onclick = () => {
-      location.href = target;
-    };
-  </script>
+  <a id="go" rel="noopener"></a>
 </body>
 </html>

@@ -1,0 +1,8 @@
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'none'; font-src 'none'; connect-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; block-all-mixed-content; upgrade-insecure-requests;
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Permissions-Policy: accelerator=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  X-XSS-Protection: 1; mode=block

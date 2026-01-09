@@ -1,0 +1,5 @@
+#url {
+  white-space: pre-wrap;      /* 允许换行 */
+  word-break: break-all;      /* 极长字符串强制断行 */
+  overflow-wrap: anywhere;    /* 现代浏览器更优断行 */
+}
